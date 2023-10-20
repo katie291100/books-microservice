@@ -7,9 +7,11 @@ import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
+import uk.ac.york.eng2.books.cli.subcommands.AddBookCommand;
+import uk.ac.york.eng2.books.cli.subcommands.GetBooksCommand;
 
 @Command(name = "book-cli", description = "...",
-        mixinStandardHelpOptions = true)
+        mixinStandardHelpOptions = true, subcommands = {GetBooksCommand.class, AddBookCommand.class})
 public class BookCliCommand implements Runnable {
 
     @Option(names = {"-v", "--verbose"}, description = "...")

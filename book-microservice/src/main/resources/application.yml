@@ -1,0 +1,23 @@
+micronaut:
+  application:
+    name: book-microservice
+datasources:
+  default:
+    driver-class-name: org.mariadb.jdbc.Driver
+    db-type: mariadb
+    dialect: MYSQL
+jpa:
+  default:
+    entity-scan:
+      packages:
+        - uk.ac.york.eng2.books.domain
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+kafka:
+  enabled: false
+netty:
+  default:
+    allocator:
+      max-order: 3
