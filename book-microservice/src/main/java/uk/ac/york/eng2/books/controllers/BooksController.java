@@ -57,5 +57,17 @@ public class BooksController {
         return HttpResponse.ok();
     }
 
+    @Delete("/{id}")
+    @Transactional
+    public HttpResponse<Void> deleteBook(long id) {
+        Book bookRecord = repo.findById(id).orElse(null);
+
+        if (bookRecord == null) {
+            return HttpResponse.notFound();
+        }
+
+        repo.delete(bookRecord);
+        return HttpResponse.ok();
+    }
 
 }

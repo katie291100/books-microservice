@@ -1,10 +1,7 @@
 package uk.ac.york.eng2.books.cli;
 
 import io.micronaut.http.HttpResponse;
-import io.micronaut.http.annotation.Body;
-import io.micronaut.http.annotation.Get;
-import io.micronaut.http.annotation.Post;
-import io.micronaut.http.annotation.Put;
+import io.micronaut.http.annotation.*;
 import io.micronaut.http.client.annotation.Client;
 
 
@@ -22,5 +19,6 @@ public interface BooksClient {
     @Put("/{id}")
     public HttpResponse<Void> updateBook(long id, @Body BookDTO bookDetails);
 
-
+    @Delete("/{id}")
+    public HttpResponse<Void> deleteBook(long id);
 }

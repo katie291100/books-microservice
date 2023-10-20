@@ -4,17 +4,15 @@ import io.micronaut.configuration.picocli.PicocliRunner;
 
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
-import uk.ac.york.eng2.books.cli.commands.AddBookCommand;
-import uk.ac.york.eng2.books.cli.commands.GetBookCommand;
-import uk.ac.york.eng2.books.cli.commands.GetBooksCommand;
-import uk.ac.york.eng2.books.cli.commands.UpdateBookCommand;
+import uk.ac.york.eng2.books.cli.commands.*;
 
 @Command(name = "book-cli", description = "...",
         mixinStandardHelpOptions = true,
         subcommands = {GetBooksCommand.class,
                 AddBookCommand.class,
                 GetBookCommand.class,
-                UpdateBookCommand.class})
+                UpdateBookCommand.class,
+                DeleteBookCommand.class})
 public class BookCliCommand implements Runnable {
     @Option(names = {"-v", "--verbose"}, description = "...")
     boolean verbose;
