@@ -6,10 +6,8 @@ import jakarta.persistence.Column;
 @Serdeable
 public class BookDTO {
 	
-	@Column(nullable=false)
 	private String title;
 
-	@Column(nullable=false)
 	private Integer year;
 
 	public Integer getYear() {

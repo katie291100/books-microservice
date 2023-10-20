@@ -18,7 +18,9 @@ dependencies {
     implementation("io.micronaut.serde:micronaut-serde-jackson")
     runtimeOnly("ch.qos.logback:logback-classic")
    	implementation("io.micronaut:micronaut-http-client")
-    
+    implementation("io.micronaut.validation:micronaut-validation")
+    implementation("jakarta.annotation:jakarta.annotation-api")
+
 }
 
 
@@ -37,6 +39,3 @@ micronaut {
         annotations("uk.ac.york.eng2.books.cli.*")
     }
 }
-
-
-

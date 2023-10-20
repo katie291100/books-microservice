@@ -1,4 +1,4 @@
-package uk.ac.york.eng2.books.cli.subcommands;
+package uk.ac.york.eng2.books.cli.commands;
 
 import jakarta.inject.Inject;
 import picocli.CommandLine.Command;

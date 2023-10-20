@@ -4,8 +4,6 @@ import io.micronaut.serde.annotation.Serdeable;
 
 @Serdeable
 public class Book {
-	
-
 	private Long id;
 	
 	private String title;
@@ -36,5 +34,9 @@ public class Book {
 	public void setYear(Integer year) {
 		this.year = year;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Book{" + "id=" + id + ", title='" + title + '\'' + ", year=" + year + '}';
+	}
 }

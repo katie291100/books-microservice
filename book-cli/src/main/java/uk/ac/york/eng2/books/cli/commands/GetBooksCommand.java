@@ -1,7 +1,8 @@
-package uk.ac.york.eng2.books.cli.subcommands;
+package uk.ac.york.eng2.books.cli.commands;
 
 import jakarta.inject.Inject;
 import picocli.CommandLine.Command;
+import uk.ac.york.eng2.books.cli.Book;
 import uk.ac.york.eng2.books.cli.BooksClient;
 
 @Command(name = "get-books", description = "get all books",
@@ -12,8 +13,8 @@ public class GetBooksCommand implements Runnable {
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		System.out.println(client.list());
+		Iterable<Book> result = client.list();
+		result.forEach(it -> System.out.println(it.toString()));
 		
 	} 
 	
