@@ -1,5 +1,6 @@
 package uk.ac.york.eng2.books.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.micronaut.serde.annotation.Serdeable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -8,6 +9,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.Set;
+import jakarta.persistence.*;
 
 import java.util.Set;
 
@@ -25,6 +29,7 @@ public class User {
     @JsonIgnore
     @ManyToMany(mappedBy = "readers")
     private Set<Book> readBooks;
+
 
     public Long getId() {
         return id;
