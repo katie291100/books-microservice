@@ -33,6 +33,14 @@ public class User {
         this.name = name;
     }
 
+    public Set<Book> getReadBooks() {
+        return readBooks;
+    }
+
+    public void setReadBooks(Set<Book> readBooks) {
+        this.readBooks = readBooks;
+    }
+
     @Override
     public String toString() {
         return "User{" +
