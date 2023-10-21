@@ -8,18 +8,14 @@ import jakarta.persistence.Id;
 
 @Serdeable
 @Entity
-public class Book {
+public class User {
 
     @Id
     @GeneratedValue
     private Long id;
 
     @Column(nullable = false)
-    private String title;
-
-    @Column(nullable = false)
-    private Integer year;
-
+    private String name;
 
     public Long getId() {
         return id;
@@ -29,28 +25,19 @@ public class Book {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Integer getYear() {
-        return year;
-    }
-
-    public void setYear(Integer year) {
-        this.year = year;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
-        return "Book{" +
+        return "User{" +
                 "id=" + id +
-                ", title='" + title + '\'' +
-                ", year=" + year +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

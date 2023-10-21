@@ -1,7 +1,7 @@
 plugins {
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("io.micronaut.application") version "4.0.4"
-    id("io.micronaut.test-resources") version "4.0.4"
+//    id("io.micronaut.test-resources") version "4.0.4"
     id("io.micronaut.aot") version "4.0.4"
 }
 
@@ -37,7 +37,7 @@ dependencies {
 
     // Logging via Logback
     runtimeOnly("ch.qos.logback:logback-classic")
-	runtimeOnly("org.yaml:snakeyaml")
+    runtimeOnly("org.yaml:snakeyaml")
     // Type hints for native-image
     annotationProcessor("io.micronaut:micronaut-graal")
     compileOnly("org.graalvm.nativeimage:svm")
@@ -62,12 +62,12 @@ micronaut {
         incremental(true)
         annotations("uk.ac.york.eng2.books.*")
     }
-    testResources {
-        sharedServer = true
-    }
+//    testResources {
+//        sharedServer = true
+//    }
     aot {
-    // Please review carefully the optimizations enabled below
-    // Check https://micronaut-projects.github.io/micronaut-aot/latest/guide/ for more details
+        // Please review carefully the optimizations enabled below
+        // Check https://micronaut-projects.github.io/micronaut-aot/latest/guide/ for more details
         optimizeServiceLoading = false
         convertYamlToJava = false
         precomputeOperations = true

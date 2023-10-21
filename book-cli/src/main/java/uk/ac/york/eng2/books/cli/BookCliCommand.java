@@ -12,7 +12,12 @@ import uk.ac.york.eng2.books.cli.commands.*;
                 AddBookCommand.class,
                 GetBookCommand.class,
                 UpdateBookCommand.class,
-                DeleteBookCommand.class})
+                DeleteBookCommand.class,
+                AddUserCommand.class,
+                GetUsersCommand.class,
+                GetUserCommand.class,
+                UpdateUserCommand.class,
+                DeleteUserCommand.class})
 public class BookCliCommand implements Runnable {
     @Option(names = {"-v", "--verbose"}, description = "...")
     boolean verbose;
