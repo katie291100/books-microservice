@@ -1,10 +1,10 @@
 package uk.ac.york.eng2.books.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.micronaut.serde.annotation.Serdeable;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.Set;
 
 @Serdeable
 @Entity
@@ -20,6 +20,9 @@ public class Book {
     @Column(nullable = false)
     private Integer year;
 
+    @JsonIgnore
+    @ManyToMany
+    private Set<User> readers;
 
     public Long getId() {
         return id;
@@ -43,6 +46,14 @@ public class Book {
 
     public void setYear(Integer year) {
         this.year = year;
+    }
+
+    public Set<User> getReaders() {
+        return readers;
+    }
+
+    public void setReaders(Set<User> readers) {
+        this.readers = readers;
     }
 
     @Override

@@ -3,6 +3,7 @@ package uk.ac.york.eng2.books.controllers;
 
 import java.net.URI;
 import java.util.Optional;
+import java.util.Set;
 
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.http.HttpResponse;
@@ -10,6 +11,7 @@ import io.micronaut.http.annotation.*;
 import io.micronaut.transaction.annotation.Transactional;
 import jakarta.inject.Inject;
 import uk.ac.york.eng2.books.domain.Book;
+import uk.ac.york.eng2.books.domain.User;
 import uk.ac.york.eng2.books.dto.BookDTO;
 import uk.ac.york.eng2.books.repositories.BooksRepository;
 
@@ -70,4 +72,15 @@ public class BooksController {
         return HttpResponse.ok();
     }
 
+    @Get("/{id}/readers")
+    public Set<User> getReaders(long id) {
+        Book bookRecord = repo.findById(id).orElse(null);
+
+        if (bookRecord == null) {
+            return null;
+        }
+
+
+        return bookRecord.getReaders();
+    }
 }
