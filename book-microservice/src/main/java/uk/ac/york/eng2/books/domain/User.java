@@ -5,6 +5,11 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.Set;
 
 @Serdeable
 @Entity
@@ -16,6 +21,10 @@ public class User {
 
     @Column(nullable = false)
     private String name;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "readers")
+    private Set<Book> readBooks;
 
     public Long getId() {
         return id;
