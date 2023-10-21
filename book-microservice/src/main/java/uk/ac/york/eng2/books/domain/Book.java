@@ -20,9 +20,6 @@ public class Book {
     @Column(nullable = false)
     private Integer year;
 
-    @JsonIgnore
-    @ManyToMany
-    private Set<User> readers;
 
     public Long getId() {
         return id;
@@ -47,15 +44,7 @@ public class Book {
     public void setYear(Integer year) {
         this.year = year;
     }
-
-    public Set<User> getReaders() {
-        return readers;
-    }
-
-    public void setReaders(Set<User> readers) {
-        this.readers = readers;
-    }
-
+    
     @Override
     public String toString() {
         return "Book{" +

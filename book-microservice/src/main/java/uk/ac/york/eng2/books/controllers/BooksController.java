@@ -71,16 +71,4 @@ public class BooksController {
         repo.delete(bookRecord);
         return HttpResponse.ok();
     }
-
-    @Get("/{id}/readers")
-    public Set<User> getReaders(long id) {
-        Book bookRecord = repo.findById(id).orElse(null);
-
-        if (bookRecord == null) {
-            return null;
-        }
-
-
-        return bookRecord.getReaders();
-    }
 }

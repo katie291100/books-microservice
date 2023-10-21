@@ -10,9 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface BooksRepository extends CrudRepository<Book, Long> {
-    @Join(value = "readers", type = Join.Type.LEFT_FETCH)
-    @Override
-    Optional<Book> findById(@NotNull Long id);
-
 
 }

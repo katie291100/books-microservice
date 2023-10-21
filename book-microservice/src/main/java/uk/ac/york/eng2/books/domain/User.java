@@ -16,11 +16,7 @@ public class User {
 
     @Column(nullable = false)
     private String name;
-
-    @JsonIgnore
-    @ManyToMany(mappedBy = "readers")
-    private Set<Book> readBooks;
-
+    
     public Long getId() {
         return id;
     }
