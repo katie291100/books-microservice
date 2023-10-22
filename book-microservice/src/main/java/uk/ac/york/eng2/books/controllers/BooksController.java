@@ -100,4 +100,18 @@ public class BooksController {
         bookRecord.setReaders(currentReaders);
         return HttpResponse.ok();
     }
+
+    @Transactional
+    @Delete("/{bookId}/readers/{userId}")
+    public HttpResponse<Void> deleteReader(long bookId, long userId) {
+        Book bookRecord = repo.findById(bookId).orElse(null);
+        User userRecord = userRepo.findById(userId).orElse(null);
+        if (bookRecord == null || userRecord == null) {
+            return HttpResponse.notFound();
+        }
+        Set<User> currentReaders = bookRecord.getReaders();
+        currentReaders.remove(userRecord);
+        bookRecord.setReaders(currentReaders);
+        return HttpResponse.ok();
+    }
 }
