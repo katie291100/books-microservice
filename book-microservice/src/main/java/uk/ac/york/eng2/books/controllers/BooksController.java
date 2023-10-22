@@ -2,6 +2,7 @@ package uk.ac.york.eng2.books.controllers;
 
 
 import java.net.URI;
+import java.util.List;
 import java.util.Set;
 
 import io.micronaut.core.annotation.NonNull;
@@ -86,11 +87,12 @@ public class BooksController {
         return bookRecord.getReaders();
     }
 
+    @Transactional
     @Put("/{bookId}/readers/{userId}")
     public HttpResponse<Void> addReader(long bookId, long userId) {
         Book bookRecord = repo.findById(bookId).orElse(null);
         User userRecord = userRepo.findById(userId).orElse(null);
-        if (bookRecord == null | userRecord == null) {
+        if (bookRecord == null || userRecord == null) {
             return HttpResponse.notFound();
         }
         Set<User> currentReaders = bookRecord.getReaders();
