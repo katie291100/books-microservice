@@ -21,4 +21,7 @@ public interface BooksClient {
 
     @Delete("/{id}")
     public HttpResponse<Void> deleteBook(long id);
+
+    @Delete("/{id}/readers/{userId}")
+    public HttpResponse<Void> deleteReader(long id, long userId);
 }

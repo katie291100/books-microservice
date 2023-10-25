@@ -13,6 +13,7 @@ import jakarta.inject.Inject;
 import uk.ac.york.eng2.books.domain.Book;
 import uk.ac.york.eng2.books.domain.User;
 import uk.ac.york.eng2.books.dto.BookDTO;
+import uk.ac.york.eng2.books.events.BooksProducer;
 import uk.ac.york.eng2.books.repositories.BooksRepository;
 import uk.ac.york.eng2.books.repositories.UsersRepository;
 
@@ -22,6 +23,8 @@ public class BooksController {
     private BooksRepository repo;
     @Inject
     private UsersRepository userRepo;
+    @Inject
+    private BooksProducer kafkaClient;
 
     @Get("/")
     public Iterable<Book> list() {
@@ -98,6 +101,10 @@ public class BooksController {
         Set<User> currentReaders = bookRecord.getReaders();
         currentReaders.add(userRecord);
         bookRecord.setReaders(currentReaders);
+        if (bookRecord.getReaders().add(userRecord)) {
+            kafkaClient.readBook(bookId, bookRecord);
+        }
+
         return HttpResponse.ok();
     }
 
@@ -114,4 +121,5 @@ public class BooksController {
         bookRecord.setReaders(currentReaders);
         return HttpResponse.ok();
     }
+
 }
