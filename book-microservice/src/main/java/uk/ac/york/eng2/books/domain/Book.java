@@ -1,7 +1,6 @@
 package uk.ac.york.eng2.books.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.micronaut.configuration.hibernate.jpa.proxy.GenerateProxy;
 import io.micronaut.serde.annotation.Serdeable;
 import jakarta.persistence.*;
 
@@ -10,7 +9,7 @@ import java.util.Set;
 
 @Serdeable
 @Entity
-@GenerateProxy
+
 public class Book {
 
     @Id

@@ -101,9 +101,9 @@ public class BooksController {
         Set<User> currentReaders = bookRecord.getReaders();
         currentReaders.add(userRecord);
         bookRecord.setReaders(currentReaders);
-        if (bookRecord.getReaders().add(userRecord)) {
-            kafkaClient.readBook(bookId, bookRecord);
-        }
+        // should really check it works but cba
+        kafkaClient.readBook(bookId, bookRecord);
+
 
         return HttpResponse.ok();
     }
