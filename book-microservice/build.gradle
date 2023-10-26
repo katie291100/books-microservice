@@ -17,6 +17,7 @@ dependencies {
 
     // HTTP request validation
     annotationProcessor("io.micronaut:micronaut-http-validation")
+    annotationProcessor("io.micronaut.serde:micronaut-serde-processor")
     implementation("io.micronaut.validation:micronaut-validation")
     // Data mapping via Hibernate and JPA to a MariaDB database
     annotationProcessor("io.micronaut.data:micronaut-data-processor")

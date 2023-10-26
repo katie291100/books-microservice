@@ -2,7 +2,7 @@ package uk.ac.york.eng2.books.controllers;
 
 
 import java.net.URI;
-import java.util.Optional;
+import java.util.List;
 import java.util.Set;
 
 import io.micronaut.core.annotation.NonNull;
@@ -13,12 +13,18 @@ import jakarta.inject.Inject;
 import uk.ac.york.eng2.books.domain.Book;
 import uk.ac.york.eng2.books.domain.User;
 import uk.ac.york.eng2.books.dto.BookDTO;
+import uk.ac.york.eng2.books.events.BooksProducer;
 import uk.ac.york.eng2.books.repositories.BooksRepository;
+import uk.ac.york.eng2.books.repositories.UsersRepository;
 
 @Controller("/books")
 public class BooksController {
     @Inject
     private BooksRepository repo;
+    @Inject
+    private UsersRepository userRepo;
+    @Inject
+    private BooksProducer kafkaClient;
 
     @Get("/")
     public Iterable<Book> list() {
@@ -71,4 +77,49 @@ public class BooksController {
         repo.delete(bookRecord);
         return HttpResponse.ok();
     }
+
+    @Get("/{id}/readers")
+    public Set<User> getReaders(long id) {
+        Book bookRecord = repo.findById(id).orElse(null);
+
+        if (bookRecord == null) {
+            return null;
+        }
+
+
+        return bookRecord.getReaders();
+    }
+
+    @Transactional
+    @Put("/{bookId}/readers/{userId}")
+    public HttpResponse<Void> addReader(long bookId, long userId) {
+        Book bookRecord = repo.findById(bookId).orElse(null);
+        User userRecord = userRepo.findById(userId).orElse(null);
+        if (bookRecord == null || userRecord == null) {
+            return HttpResponse.notFound();
+        }
+        Set<User> currentReaders = bookRecord.getReaders();
+        currentReaders.add(userRecord);
+        bookRecord.setReaders(currentReaders);
+        // should really check it works but cba
+        kafkaClient.readBook(bookId, bookRecord);
+
+
+        return HttpResponse.ok();
+    }
+
+    @Transactional
+    @Delete("/{bookId}/readers/{userId}")
+    public HttpResponse<Void> deleteReader(long bookId, long userId) {
+        Book bookRecord = repo.findById(bookId).orElse(null);
+        User userRecord = userRepo.findById(userId).orElse(null);
+        if (bookRecord == null || userRecord == null) {
+            return HttpResponse.notFound();
+        }
+        Set<User> currentReaders = bookRecord.getReaders();
+        currentReaders.remove(userRecord);
+        bookRecord.setReaders(currentReaders);
+        return HttpResponse.ok();
+    }
+
 }

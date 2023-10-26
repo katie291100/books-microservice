@@ -2,6 +2,15 @@ package uk.ac.york.eng2.books.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.micronaut.serde.annotation.Serdeable;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.Set;
 import jakarta.persistence.*;
 
 import java.util.Set;
@@ -16,7 +25,12 @@ public class User {
 
     @Column(nullable = false)
     private String name;
-    
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "readers")
+    private Set<Book> readBooks;
+
+
     public Long getId() {
         return id;
     }
@@ -31,6 +45,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Book> getReadBooks() {
+        return readBooks;
+    }
+
+    public void setReadBooks(Set<Book> readBooks) {
+        this.readBooks = readBooks;
     }
 
     @Override

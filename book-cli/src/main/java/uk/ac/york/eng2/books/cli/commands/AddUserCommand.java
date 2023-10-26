@@ -20,6 +20,7 @@ public class AddUserCommand implements Runnable {
         UserDTO userDTO = new UserDTO();
         userDTO.setName(name);
         client.add(userDTO);
+
     }
 
 }

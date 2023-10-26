@@ -4,10 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.micronaut.serde.annotation.Serdeable;
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Serdeable
 @Entity
+
 public class Book {
 
     @Id
@@ -19,6 +21,19 @@ public class Book {
 
     @Column(nullable = false)
     private Integer year;
+
+    @JsonIgnore
+    @ManyToMany
+    private Set<User> readers = new HashSet<>();
+
+
+    public Set<User> getReaders() {
+        return readers;
+    }
+
+    public void setReaders(Set<User> readers) {
+        this.readers = readers;
+    }
 
 
     public Long getId() {
@@ -44,7 +59,7 @@ public class Book {
     public void setYear(Integer year) {
         this.year = year;
     }
-    
+
     @Override
     public String toString() {
         return "Book{" +
@@ -53,4 +68,6 @@ public class Book {
                 ", year=" + year +
                 '}';
     }
+
+
 }
